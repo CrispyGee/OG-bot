@@ -1,6 +1,7 @@
 var ogameConf = module.exports = {
     username: "crispy",
     password: "asdasd12",
+    homePlanet: "5:157:8",
     expeditions: {
         num: 3,
         numTransporters: 50

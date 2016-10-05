@@ -1,1 +1,1 @@
-protractor conf.js
+protractor allConf.js
