@@ -34,7 +34,7 @@ function buildTransporterOnPlanet() {
     browser.driver.sleep(2000);
     return element(by.id("details203")).click().then(function() {
         browser.driver.sleep(2000);
-        element(by.id("number")).sendKeys(1);
+        element(by.id("number")).sendKeys(5);
         browser.driver.sleep(1000);
         return element(by.id("resources_metal")).getText().then(function(metal) {
             return element(by.id("resources_crystal")).getText().then(function(crystal) {
@@ -42,8 +42,8 @@ function buildTransporterOnPlanet() {
                 console.log("crystal: " + crystal);
                 metal = metal.replace(".", "");
                 crystal = crystal.replace(".", "");
-                if (metal > 6000 && crystal > 6000) {
-                    console.log("building a transporter");
+                if (metal > 120000 && crystal > 60000) {
+                    console.log("building 5 transporters");
                     return element(by.className("build-it")).click();
                 } else {
                     console.log("not enough resources")

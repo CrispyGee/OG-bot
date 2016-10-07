@@ -11,7 +11,6 @@ describe('Ogame automation', function() {
 function sendTransportersFromPlanets() {
     if (ogameConf.transportToMain) {
         console.log("starting to transport resources to main planet");
-        console.log("navigating to fleet page")
         browser.get("https://s140-de.ogame.gameforge.com/game/index.php?page=fleet1");
         browser.driver.sleep(1000);
         element(by.id('planetList')).all(by.tagName('div')).then(function(planetsOut) {
@@ -31,10 +30,29 @@ function sendTransportersFromPlanets() {
 function sendTransportersToPlanet() {
     console.log("switching to next planet");
     browser.driver.sleep(2000);
-    console.log("checking if fleets available");
-    element.all(by.id("button203")).then(function(button203) {
-        if (button203.length > 0) {
-            return doActualTransport();
+    console.log("checking if ships and fleetslots available");
+    element(by.id("slots")).element(by.tagName("span")).getText().then(function(fleetSlots) {
+        var fleetSlotsSplit = fleetSlots.split(":")[1].split("/");
+        var fleetSlotsLeft = fleetSlotsSplit[1] - fleetSlotsSplit[0];
+        if (fleetSlotsLeft > 1) {
+            element.all(by.id("button203")).then(function(button203) {
+                if (button203.length > 0) {
+                    console.log("checking if enough resources")
+                    return element(by.id("resources_metal")).getText().then(function(metal) {
+                        return element(by.id("resources_crystal")).getText().then(function(crystal) {
+                            return element(by.id("resources_deuterium")).getText().then(function(deuterium) {
+                                metal = metal.replace(".", "");
+                                crystal = crystal.replace(".", "");
+                                deuterium = deuterium.replace(".", "");
+                                var resourceSum = metal + crystal + deuterium;
+                                if (resourceSum > 100000) {
+                                    return doActualTransport();
+                                }
+                            });
+                        });
+                    });
+                }
+            });
         }
     });
 }

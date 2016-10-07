@@ -31,27 +31,33 @@ function attackPlayer(player) {
     var playerSystem = playerCoords[1];
     var playerPosition = playerCoords[2];
     browser.get("https://s140-de.ogame.gameforge.com/game/index.php?page=fleet1");
-    return element(by.id("button203")).element(by.className("level")).getText().then(function(numberTransporters) {
-        return element(by.id("ship_203")).sendKeys(player.numTransporters).then(function() {
-            browser.driver.sleep(2000);
-            return element(by.id("continue")).click().then(function() {
-                browser.driver.sleep(2000);
-                return element.all(by.id("galaxy")).then(function(galaxy) {
-                    if (galaxy.length > 0) {
-                      element(by.id("galaxy")).click().then(function() {
-                          element(by.id("galaxy")).sendKeys(playerGalaxy);
-                      });
-                      element(by.id("system")).sendKeys(playerSystem);
-                      element(by.id("position")).sendKeys(playerPosition);
-                      browser.driver.sleep(1000);
-                      return element(by.id("continue")).click().then(function() {
-                          browser.driver.sleep(2000);
-                          checkIfAttackPossibleAndDoIt(player);
-                      });
-                    }
+    element(by.id("slots")).element(by.tagName("span")).getText().then(function(fleetSlots) {
+        var fleetSlotsSplit = fleetSlots.split(":")[1].split("/");
+        var fleetSlotsLeft = fleetSlotsSplit[1] - fleetSlotsSplit[0];
+        if (fleetSlotsLeft > 2) {
+            return element(by.id("button203")).element(by.className("level")).getText().then(function(numberTransporters) {
+                return element(by.id("ship_203")).sendKeys(player.numTransporters).then(function() {
+                    browser.driver.sleep(2000);
+                    return element(by.id("continue")).click().then(function() {
+                        browser.driver.sleep(2000);
+                        return element.all(by.id("galaxy")).then(function(galaxy) {
+                            if (galaxy.length > 0) {
+                                element(by.id("galaxy")).click().then(function() {
+                                    element(by.id("galaxy")).sendKeys(playerGalaxy);
+                                });
+                                element(by.id("system")).sendKeys(playerSystem);
+                                element(by.id("position")).sendKeys(playerPosition);
+                                browser.driver.sleep(1000);
+                                return element(by.id("continue")).click().then(function() {
+                                    browser.driver.sleep(2000);
+                                    checkIfAttackPossibleAndDoIt(player);
+                                });
+                            }
+                        });
+                    });
                 });
             });
-        });
+        }
     });
 }
 
