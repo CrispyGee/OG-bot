@@ -1,4 +1,4 @@
-var ogameConf = require("./ogbsettings.js");
+var ogameConf = require("./conf/botConf.js");
 
 describe('Ogame automation', function() {
     it('should do expeditions', function() {
@@ -29,6 +29,11 @@ function sendExpedition() {
         var fleetSlotsSplit = fleetSlots.split(":")[1].split("/");
         var fleetSlotsLeft = fleetSlotsSplit[1] - fleetSlotsSplit[0];
         if (fleetSlotsLeft > 1) {
+          //TODO send only if expo slots
+          // element(by.id("slots")).all(by.tagName("span"))[3].getText().then(function(fleetSlots) {
+          //     var fleetSlotsSplit = fleetSlots.split(":")[1].split("/");
+          //     var fleetSlotsLeft = fleetSlotsSplit[1] - fleetSlotsSplit[0];
+          //     if (fleetSlotsLeft > 1) {
             return element(by.id("button203")).element(by.className("level")).getText().then(function(numberTransporters) {
                 var numTransporters = ogameConf.expeditions.numTransporters;
                 return element(by.id("ship_203")).sendKeys(numTransporters).then(function() {

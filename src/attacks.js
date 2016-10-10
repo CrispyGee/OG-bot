@@ -1,4 +1,4 @@
-var ogameConf = require("./ogbsettings.js");
+var ogameConf = require("./conf/botConf.js");
 
 describe('Ogame automation', function() {
     it('should do attacks', function() {
@@ -13,6 +13,8 @@ function sendAttacks() {
     var attackPromise;
     var targets = ogameConf.targets;
     shuffle(targets);
+    element(by.id("planetList")).element(by.tagName("a")).click();
+    browser.driver.sleep(2000);
     for (var i = 0; i < targets.length; i++) {
         const x = i;
         if (attackPromise) {
@@ -34,7 +36,7 @@ function attackPlayer(player) {
     element(by.id("slots")).element(by.tagName("span")).getText().then(function(fleetSlots) {
         var fleetSlotsSplit = fleetSlots.split(":")[1].split("/");
         var fleetSlotsLeft = fleetSlotsSplit[1] - fleetSlotsSplit[0];
-        if (fleetSlotsLeft > 2) {
+        if (fleetSlotsLeft > 1) {
             return element(by.id("button203")).element(by.className("level")).getText().then(function(numberTransporters) {
                 return element(by.id("ship_203")).sendKeys(player.numTransporters).then(function() {
                     browser.driver.sleep(2000);

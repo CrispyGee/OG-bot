@@ -1,4 +1,4 @@
-var ogameConf = require("./ogbsettings.js");
+var ogameConf = require("./conf/botConf.js");
 
 describe('Ogame automation', function() {
     it('should do save fleet and resources', function() {
@@ -32,6 +32,9 @@ function saveFleetAndResources() {
                         }
                     });
                 });
+            }
+            else{
+              console.logs("no hostile fleet movements detected");
             }
         });
     }

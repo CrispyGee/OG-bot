@@ -1,4 +1,4 @@
-var ogameConf = require("./ogbsettings.js");
+var ogameConf = require("./conf/botConf.js");
 
 describe('Ogame automation', function() {
     it('log in', function() {
