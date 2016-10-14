@@ -28,12 +28,12 @@ function sendAttacks() {
 }
 
 function attackPlayer(player) {
+	browser.get("https://s140-de.ogame.gameforge.com/game/index.php?page=fleet1");
     var playerCoords = player.coords.split(":");
     var playerGalaxy = playerCoords[0];
     var playerSystem = playerCoords[1];
     var playerPosition = playerCoords[2];
-    browser.get("https://s140-de.ogame.gameforge.com/game/index.php?page=fleet1");
-    element(by.id("slots")).element(by.tagName("span")).getText().then(function(fleetSlots) {
+    return element(by.id("slots")).element(by.tagName("span")).getText().then(function(fleetSlots) {
         var fleetSlotsSplit = fleetSlots.split(":")[1].split("/");
         var fleetSlotsLeft = fleetSlotsSplit[1] - fleetSlotsSplit[0];
         if (fleetSlotsLeft > 1) {

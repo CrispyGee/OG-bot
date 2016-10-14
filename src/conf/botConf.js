@@ -5,18 +5,21 @@ var ogameConf = module.exports = {
     savePlanet: "5:157:7",
     expeditions: {
         num: 3,
-        numTransporters: 100
+        numTransporters: 130
     },
     targets: [{
-            coords: "5:157:11",
+            coords: "5:158:4",
             numTransporters: 2
-        }, {
-            coords: "5:157:12",
-            numTransporters: 2
-        }, {
-            coords: "5:157:13",
-            numTransporters: 2
-        }, {
+        },
+        //{
+          //  coords: "5:157:12",
+         //   numTransporters: 2
+        //},
+        //{
+            //coords: "5:157:13",
+          //  numTransporters: 2
+        //},
+        {
             coords: "5:148:5",
             numTransporters: 2
         }, {
@@ -59,10 +62,10 @@ var ogameConf = module.exports = {
             coords: "5:179:8",
             numTransporters: 2
         },
-        {
-            coords: "5:147:8",
-            numTransporters: 2
-        },
+        // {
+        //     coords: "5:147:8",
+        //     numTransporters: 2
+        // },
         {
             coords: "5:147:9",
             numTransporters: 2
